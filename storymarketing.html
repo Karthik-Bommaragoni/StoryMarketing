@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Marketing — Marketing That Helps Manufacturing Companies Win More Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --ink-soft:#3A3A38;
+    --gray:#6E6E68;
+    --paper:#F5F4EF;
+    --paper-alt:#ECEAE3;
+    --white:#FFFFFF;
+    --orange:#E8590C;
+    --orange-dark:#C74A0A;
+    --line: rgba(20,20,20,0.14);
+    --line-soft: rgba(20,20,20,0.09);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .display{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+  svg.icon{ width:22px; height:22px; stroke:currentColor; stroke-width:1.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+
+  .eyebrow{
+    font-size:12.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--orange); display:flex; align-items:center; gap:9px;
+  }
+  .eyebrow .ar{ font-size:14px; }
+  .on-dark .eyebrow{ color:var(--orange); }
+
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ============ NAV ============ */
+  header{ position:sticky; top:0; z-index:50; background:rgba(245,244,239,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  nav{ max-width:1180px; margin:0 auto; padding:20px 32px; display:flex; align-items:center; justify-content:space-between; }
+  @media (max-width:640px){ nav{ padding:16px 20px; } }
+  .logo{ font-family:'Big Shoulders Display', sans-serif; font-weight:800; font-size:21px; letter-spacing:.01em; text-transform:uppercase; }
+  .logo span{ color:var(--orange); }
+  .navlinks{ display:flex; gap:30px; }
+  .navlinks a{ font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--ink); opacity:.72; }
+  .navlinks a:hover{ opacity:1; color:var(--orange); }
+  @media (max-width:920px){ .navlinks{ display:none; } }
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:13px 22px; border:none; white-space:nowrap; transition:background .2s ease, color .2s ease;
+  }
+  .btn-primary{ background:var(--orange); color:var(--white); }
+  .btn-primary:hover{ background:var(--orange-dark); }
+  .btn-ghost{ background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+  .btn-ghost.on-dark{ color:var(--white); border-color:rgba(255,255,255,.5); }
+  .btn-ghost.on-dark:hover{ background:var(--white); color:var(--ink); }
+  .btn-arrow{ transition:transform .2s ease; }
+  .btn:hover .btn-arrow{ transform:translateX(3px); }
+  .btn-link{ font-size:13px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--orange); display:inline-flex; align-items:center; gap:6px; }
+  .btn-link:hover .btn-arrow{ transform:translateX(3px); }
+
+  /* ============ HERO ============ */
+  .hero{ padding:64px 0 0; }
+  .hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; padding-bottom:64px; }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero h1{ font-size:clamp(34px,4.6vw,52px); line-height:1.04; font-weight:800; margin:16px 0 18px; }
+  .hero h1 .accent{ color:var(--orange); }
+  .hero p.lede{ font-size:16.5px; line-height:1.6; color:var(--ink-soft); max-width:48ch; margin-bottom:26px; }
+  .hero-ctas{ margin-bottom:26px; display:flex; flex-direction:column; align-items:flex-start; gap:9px; }
+  .cta-microcopy{ font-size:12.5px; color:var(--gray); }
+  .tag-line{ font-size:14px; color:var(--gray); }
+  .tag-line b{ color:var(--ink); font-weight:600; }
+
+  .hero-visual{ position:relative; }
+  .factory-art{ width:100%; aspect-ratio:6/5; position:relative; overflow:hidden; background:linear-gradient(160deg,#2b2b28,#0f0f0e 70%); }
+  .factory-art svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .spec-card{
+    position:absolute; right:22px; bottom:22px; left:22px; max-width:340px;
+    background:rgba(245,244,239,0.97); color:var(--ink); padding:20px 22px;
+    box-shadow:0 20px 40px -14px rgba(0,0,0,.5);
+  }
+  @media (max-width:520px){ .spec-card{ position:static; margin-top:16px; max-width:none; } .factory-art{ aspect-ratio:16/10; } }
+  .spec-head{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:10px; }
+  .spec-head .st{ font-family:'Big Shoulders Display', sans-serif; font-weight:800; font-size:16px; text-transform:uppercase; }
+  .spec-head .sn{ font-size:11px; color:var(--gray); }
+  .spec-row{ display:flex; justify-content:space-between; gap:14px; font-size:12.5px; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+  .spec-row:last-of-type{ border-bottom:none; }
+  .spec-row .k{ color:var(--gray); text-transform:uppercase; letter-spacing:.06em; font-size:11px; }
+  .spec-row .v{ font-weight:600; text-align:right; }
+  .spec-bars{ display:flex; align-items:flex-end; gap:3px; margin-top:12px; height:20px; }
+  .spec-bars i{ display:block; width:5px; background:var(--orange); }
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section{ padding:76px 0; }
+  .section-head h2{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:clamp(25px,3.1vw,36px); line-height:1.08; margin-top:10px; }
+  .section-head p.sub{ margin-top:12px; font-size:15.5px; color:var(--ink-soft); line-height:1.6; max-width:54ch; }
+
+  /* ============ CREDIBILITY STRIP ============ */
+  .cred-strip{ background:var(--ink); padding:18px 0; }
+  .cred-strip-inner{ display:flex; flex-wrap:wrap; gap:14px 34px; justify-content:center; }
+  .cred-item{ display:flex; align-items:center; gap:9px; font-size:13px; color:rgba(255,255,255,.78); max-width:34ch; }
+  .cred-dot{ width:6px; height:6px; border-radius:50%; background:var(--orange); flex:none; }
+
+  /* ============ PROBLEM ============ */
+  .problem{ background:var(--paper-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .problem-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; }
+  @media (max-width:920px){ .problem-grid{ grid-template-columns:1fr; gap:40px; } }
+  .icon-chain{ display:flex; align-items:flex-start; gap:6px; margin:30px 0 26px; flex-wrap:wrap; }
+  .icon-step{ display:flex; flex-direction:column; align-items:center; width:96px; text-align:center; }
+  .icon-circle{ width:56px; height:56px; border-radius:50%; border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center; background:var(--paper); flex:none; }
+  .icon-step .ilabel{ font-size:11.5px; margin-top:9px; color:var(--ink-soft); line-height:1.3; }
+  .icon-arrow{ color:var(--orange); font-size:16px; align-self:center; margin-top:26px; }
+  @media (max-width:520px){ .icon-arrow{ display:none; } .icon-chain{ gap:14px 24px; } }
+  .problem-note{ font-size:15.5px; line-height:1.65; color:var(--ink-soft); max-width:58ch; }
+  .chain-text{ font-size:15.5px; line-height:1.6; color:var(--ink-soft); max-width:58ch; margin:22px 0 14px; }
+  .chain-text b{ color:var(--ink); font-weight:600; }
+
+  .qside{ position:relative; }
+  .blueprint-bg{ position:absolute; top:-10px; right:-30px; width:280px; height:280px; opacity:.14; z-index:0; }
+  .qtag{ font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--orange); position:relative; z-index:1; }
+  .qline{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:clamp(22px,2.9vw,32px); line-height:1.16; max-width:18ch; position:relative; z-index:1; margin-top:8px; }
+  .qdivider{ width:44px; height:2px; background:var(--ink); margin:22px 0; position:relative; z-index:1; }
+
+  /* ============ REAL CHALLENGE ============ */
+  .challenge{ background:var(--ink); color:var(--white); }
+  .challenge .section-head h2{ color:var(--white); }
+  .challenge .section-head h2 .accent{ color:var(--orange); }
+  .flow-row{ display:flex; align-items:flex-start; gap:0; margin-top:46px; flex-wrap:wrap; }
+  .flow-node{ display:flex; flex-direction:column; align-items:center; width:150px; text-align:center; }
+  .flow-node .icon-circle{ border-color:rgba(255,255,255,.4); background:transparent; color:var(--white); }
+  .flow-node .flabel{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:700; font-size:16px; margin-top:12px; }
+  .flow-node .fitems{ margin-top:8px; font-size:12px; color:rgba(255,255,255,.55); line-height:1.7; }
+  .flow-connector{ flex:1; display:flex; align-items:center; justify-content:center; min-width:24px; padding-top:28px; color:rgba(255,255,255,.4); font-size:15px; }
+  .flow-final{ display:flex; flex-direction:column; align-items:center; width:170px; text-align:center; }
+  .flow-final .icon-circle{ border-color:var(--orange); color:var(--orange); width:64px; height:64px; }
+  .flow-final .flabel{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:19px; color:var(--orange); margin-top:12px; line-height:1.15; }
+  @media (max-width:900px){ .flow-row{ flex-direction:column; align-items:flex-start; gap:18px; } .flow-connector{ display:none; } .flow-node, .flow-final{ width:auto; align-items:flex-start; text-align:left; flex-direction:row; gap:16px; } .flow-node .fitems{ text-align:left; } }
+
+  /* ============ WHAT WE DO ============ */
+  .services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:42px 34px; margin-top:44px; }
+  @media (max-width:920px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
+  .service-item .icon-circle{ margin-bottom:16px; }
+  .service-item .svc-num{ font-size:12px; color:var(--gray); font-weight:600; letter-spacing:.06em; }
+  .service-item h3{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:700; font-size:21px; margin:6px 0 10px; }
+  .service-item p{ font-size:14.5px; line-height:1.6; color:var(--ink-soft); max-width:38ch; }
+  .service-item .btn-link{ margin-top:12px; }
+
+  .method-strip{ margin-top:50px; padding-top:26px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:6px 10px; align-items:baseline; }
+  .method-label{ font-size:12.5px; font-weight:700; color:var(--ink); text-transform:uppercase; letter-spacing:.04em; }
+  .method-chain{ font-size:13px; color:var(--ink-soft); }
+
+  /* ============ WHY ============ */
+  .why-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+  @media (max-width:860px){ .why-grid{ grid-template-columns:1fr; gap:30px; } }
+  .why-text p{ font-size:15.5px; line-height:1.68; color:var(--ink-soft); max-width:52ch; margin-bottom:14px; }
+  .why-text .bigline{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:23px; margin-top:16px; }
+  .chip-wrap{ display:flex; flex-wrap:wrap; gap:9px; }
+  .chip{ font-size:12.5px; font-weight:600; letter-spacing:.02em; padding:9px 14px; border:1.5px solid var(--ink); color:var(--ink); }
+
+  /* ============ SHIFT + RELATIONSHIPS ============ */
+  .shift-rel-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+  @media (max-width:960px){ .shift-rel-grid{ grid-template-columns:1fr; gap:48px; } }
+  .shift-box{ padding:20px 22px; margin-bottom:0; }
+  .shift-box.from{ background:var(--ink); color:var(--white); }
+  .shift-box.from .st-tag{ font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); }
+  .shift-box.from h4{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:700; font-size:17px; margin-top:6px; }
+  .shift-box ul{ list-style:none; margin-top:14px; }
+  .shift-box li{ display:flex; align-items:flex-start; gap:10px; font-size:14px; padding:7px 0; }
+  .shift-box.from li{ color:rgba(255,255,255,.8); }
+  .xmark, .checkmark{ flex:none; width:16px; height:16px; margin-top:2px; }
+  .shift-arrow-mid{ display:flex; justify-content:center; padding:10px 0; color:var(--orange); font-size:18px; }
+  .shift-box.to{ background:var(--white); border:1.5px solid var(--ink); }
+  .shift-box.to .to-head{ background:var(--orange); color:var(--white); margin:-20px -22px 14px; padding:10px 22px; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+  .shift-box.to li{ color:var(--ink); font-weight:500; }
+
+  .rel-text p{ font-size:15.5px; line-height:1.68; color:var(--ink-soft); max-width:52ch; margin-bottom:18px; }
+  .shift-text{ font-size:15.5px; line-height:1.68; color:var(--ink-soft); max-width:50ch; }
+  .rel-chain{ display:flex; gap:6px; margin:24px 0; flex-wrap:wrap; }
+  .rel-chain .icon-step{ width:88px; }
+  .rel-closer{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:19px; margin-top:6px; max-width:26ch; }
+
+  /* ============ WHO WE WORK WITH + SUCCESS ============ */
+  .who-success-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:start; }
+  @media (max-width:920px){ .who-success-grid{ grid-template-columns:1fr; gap:44px; } }
+  .industry-wrap{ display:flex; flex-wrap:wrap; gap:10px; margin:30px 0 32px; }
+  .industry-pill{ font-size:13px; font-weight:600; padding:10px 16px; border:1.5px solid var(--line); color:var(--ink); background:var(--white); }
+  .industry-pill.export{ border-color:var(--orange); color:var(--orange-dark); }
+  .who-closer{ font-size:15.5px; line-height:1.65; color:var(--ink-soft); max-width:58ch; border-top:1px solid var(--line); padding-top:24px; }
+  .who-closer b{ color:var(--ink); }
+  .export-note{ margin-top:26px; max-width:640px; padding:20px 22px; border-left:3px solid var(--orange); background:var(--paper-alt); }
+  .export-note .en-tag{ font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--orange-dark); }
+  .export-note p{ font-size:14.5px; line-height:1.6; color:var(--ink-soft); margin-top:8px; }
+
+  /* ============ SUCCESS ============ */
+  .success-list{ display:grid; gap:0; margin-top:36px; max-width:640px; }
+  .success-item{ display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid var(--line); }
+  .success-item .icon-circle{ width:34px; height:34px; flex:none; }
+  .success-item .icon-circle svg{ width:14px; height:14px; }
+  .success-item p{ font-size:15px; color:var(--ink); line-height:1.5; padding-top:6px; }
+  .success-closer{ margin-top:28px; font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:22px; }
+
+  /* ============ THE PLAN ============ */
+  .plan{ background:var(--paper-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .plan-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
+  @media (max-width:780px){ .plan-grid{ grid-template-columns:1fr; gap:34px; } }
+  .plan-step{ text-align:center; }
+  .plan-num{
+    display:flex; align-items:center; justify-content:center; width:48px; height:48px; margin:0 auto 16px;
+    border-radius:50%; background:var(--orange); color:var(--white);
+    font-family:'Big Shoulders Display', sans-serif; font-weight:800; font-size:20px;
+  }
+  .plan-step h3{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:700; font-size:19px; margin-bottom:10px; }
+  .plan-step p{ font-size:14.5px; line-height:1.6; color:var(--ink-soft); max-width:32ch; margin:0 auto; }
+
+  /* ============ FINAL CTA ============ */
+  .cta{ background:var(--ink); color:var(--white); position:relative; overflow:hidden; }
+  .cta-art{ position:absolute; right:0; top:0; bottom:0; width:38%; opacity:.5; }
+  .cta-art svg{ width:100%; height:100%; }
+  @media (max-width:820px){ .cta-art{ display:none; } }
+  .cta-inner{ display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:end; position:relative; z-index:1; }
+  @media (max-width:820px){ .cta-inner{ grid-template-columns:1fr; } }
+  .cta h2{ font-family:'Big Shoulders Display', sans-serif; text-transform:uppercase; font-weight:800; font-size:clamp(27px,3.8vw,42px); line-height:1.08; }
+  .cta h2 .accent{ color:var(--orange); }
+  .cta p{ color:rgba(255,255,255,.72); margin-top:14px; max-width:46ch; font-size:15px; line-height:1.6; }
+  .cta-ctas{ display:flex; flex-direction:column; gap:14px; align-items:flex-start; }
+  .cta-email{ display:flex; align-items:center; gap:10px; font-size:14.5px; }
+  .cta-note{ font-size:12px; color:rgba(255,255,255,.5); }
+
+  /* ============ FOOTER ============ */
+  footer{ background:var(--ink); color:var(--white); padding:60px 0 28px; border-top:1px solid rgba(255,255,255,.1); }
+  .foot-grid{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1); }
+  @media (max-width:780px){ .foot-grid{ grid-template-columns:1fr 1fr; row-gap:34px; } }
+  @media (max-width:480px){ .foot-grid{ grid-template-columns:1fr; } }
+  .foot-brand .logo{ margin-bottom:12px; }
+  .foot-brand p{ font-size:14px; color:rgba(255,255,255,.6); max-width:30ch; line-height:1.5; }
+  .foot-brand .tag{ display:inline-block; margin-top:14px; font-size:12px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:.06em; }
+  .foot-col h5{ font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:14px; }
+  .foot-col a, .foot-col span{ display:block; font-size:14px; color:rgba(255,255,255,.75); padding:6px 0; }
+  .foot-col a:hover{ color:var(--orange); }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding-top:24px; }
+  .foot-bottom span{ font-size:12.5px; color:rgba(255,255,255,.45); }
+  .foot-social{ width:34px; height:34px; border:1px solid rgba(255,255,255,.25); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+</style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">Story <span>Marketing</span></div>
+      <div class="navlinks">
+        <a href="#what-we-do">Services</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About</a>
+      </div>
+      <a href="mailto:hello@storymarketing.in?subject=Discovery%20Call%20Request&body=Hi%20Story%20Marketing%2C%0A%0AI%27d%20like%20to%20book%20a%20discovery%20call.%0A%0ACompany%3A%20%0AWebsite%3A%20%0ABest%20time%20to%20call%3A%20" class="btn btn-primary">Book a Discovery Call <span class="btn-arrow">→</span></a>
+    </nav>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="ar">→</span> Marketing for Manufacturers</span>
+        <h1 class="display">Marketing that helps manufacturing companies <span class="accent">win more business.</span></h1>
+        <p class="lede">You make great products. We help the right customers find you, understand you, trust you — and enquire. Whether they're down the road or across borders.</p>
+        <div class="hero-ctas">
+          <a href="mailto:hello@storymarketing.in?subject=Discovery%20Call%20Request&body=Hi%20Story%20Marketing%2C%0A%0AI%27d%20like%20to%20book%20a%20discovery%20call.%0A%0ACompany%3A%20%0AWebsite%3A%20%0ABest%20time%20to%20call%3A%20" class="btn btn-primary">Book a Discovery Call <span class="btn-arrow">→</span></a>
+          <span class="cta-microcopy">Free 30-min call. No pitch, no obligation.</span>
+        </div>
+        <p class="tag-line"><b>Website</b> / <b>SEO</b> / <b>LinkedIn</b> / <b>Video</b> / <b>Performance Marketing</b> / <b>Export Marketing</b></p>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="factory-art">
+          <svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="500" fill="#141414"/>
+            <g opacity="0.55" stroke="#8a8a86" stroke-width="1.5" fill="none">
+              <line x1="0" y1="150" x2="600" y2="150"/>
+              <line x1="60" y1="150" x2="60" y2="70"/>
+              <line x1="540" y1="150" x2="540" y2="70"/>
+              <line x1="60" y1="70" x2="540" y2="70"/>
+              <rect x="140" y="60" width="26" height="26"/>
+              <rect x="420" y="60" width="26" height="26"/>
+            </g>
+            <g opacity="0.9">
+              <rect x="90" y="150" width="10" height="350" fill="#1f1f1c"/>
+              <rect x="500" y="150" width="10" height="350" fill="#1f1f1c"/>
+            </g>
+            <g stroke="#4d4d47" stroke-width="2" fill="none" opacity="0.7">
+              <path d="M120 500 L120 300 L480 300 L480 500"/>
+              <path d="M200 500 L200 340"/>
+              <path d="M300 500 L300 340"/>
+              <path d="M400 500 L400 340"/>
+            </g>
+            <g fill="#e8590c" opacity="0.9">
+              <circle cx="300" cy="300" r="5"/>
+            </g>
+            <g fill="#d9d7cf">
+              <circle cx="300" cy="360" r="26"/>
+              <rect x="286" y="384" width="28" height="56" rx="4"/>
+              <rect x="278" y="392" width="12" height="34" rx="4"/>
+              <rect x="310" y="392" width="12" height="34" rx="4"/>
+            </g>
+            <g fill="#141414" opacity="0.5">
+              <rect x="0" y="0" width="600" height="500"/>
+            </g>
+            <g fill="#d9d7cf" opacity="0.9">
+              <circle cx="300" cy="358" r="24"/>
+              <path d="M280 380 q20 -14 40 0 l0 60 -40 0 z"/>
+            </g>
+            <linearGradient id="vgrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#141414" stop-opacity="0"/>
+              <stop offset="1" stop-color="#0a0a09" stop-opacity="0.85"/>
+            </linearGradient>
+            <rect width="600" height="500" fill="url(#vgrad)"/>
+          </svg>
+        </div>
+        <div class="spec-card">
+          <div class="spec-head">
+            <span class="st">Story Marketing System™</span>
+            <span class="sn">SM / 001</span>
+          </div>
+          <div class="spec-row"><span class="k">Duty</span><span class="v">Website · SEO · LinkedIn · Video</span></div>
+          <div class="spec-row"><span class="k">Output</span><span class="v">Qualified Enquiries</span></div>
+          <div class="spec-row"><span class="k">Built for</span><span class="v">Domestic &amp; Export Manufacturers</span></div>
+          <div class="spec-bars">
+            <i style="height:6px;"></i><i style="height:10px;"></i><i style="height:14px;"></i><i style="height:18px;"></i><i style="height:20px;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CREDIBILITY STRIP ================= -->
+  <div class="cred-strip">
+    <div class="wrap cred-strip-inner">
+      <div class="cred-item"><span class="cred-dot"></span>Hands-on in manufacturing — we've run outreach &amp; sales campaigns for manufacturers ourselves, not watched from outside</div>
+      <div class="cred-item"><span class="cred-dot"></span>Based in Hyderabad, part of Arkmedis — serving manufacturers pan-India and exporters</div>
+      <div class="cred-item"><span class="cred-dot"></span>Built only for industrial &amp; manufacturing companies — not a generalist agency</div>
+    </div>
+  </div>
+
+  <!-- ================= PROBLEM ================= -->
+  <section class="problem">
+    <div class="wrap problem-grid">
+      <div class="reveal">
+        <span class="eyebrow">The Problem</span>
+        <h2 class="section-head">Your factory may be visible to customers who already know you. But what about the customers who don't?</h2>
+
+        <p class="chain-text">Most manufacturers grow through <b>relationships, referrals and trade shows</b> — reliable, but dependent on the same people.</p>
+
+        <p class="problem-note">Meanwhile, your next customer is already searching online, checking your website, and comparing suppliers before they ever call you.</p>
+      </div>
+
+      <div class="qside reveal">
+        <svg class="blueprint-bg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="#141414" stroke-width="1"/><circle cx="100" cy="100" r="60" fill="none" stroke="#141414" stroke-width="1"/><circle cx="100" cy="100" r="14" fill="none" stroke="#141414" stroke-width="1"/><line x1="0" y1="100" x2="200" y2="100" stroke="#141414" stroke-width="1"/><line x1="100" y1="0" x2="100" y2="200" stroke="#141414" stroke-width="1"/></svg>
+        <span class="qtag">The question is:</span>
+        <p class="qline">When they search for what you manufacture, do they find you?</p>
+        <div class="qdivider"></div>
+        <span class="qtag">And when they find you…</span>
+        <p class="qline">Do they understand why they should choose you?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REAL CHALLENGE ================= -->
+  <section class="challenge">
+    <div class="wrap on-dark">
+      <div class="section-head reveal">
+        <span class="eyebrow">The Real Challenge</span>
+        <h2>You don't need more posts.<br><span class="accent">You need a marketing system.</span></h2>
+        <p class="sub" style="color:rgba(255,255,255,.65);">Posts alone don't create growth. You need every piece working together.</p>
+      </div>
+
+      <div class="flow-row reveal">
+        <div class="flow-node">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="M20 20l-5.5-5.5"/></svg></div>
+          <div class="flabel">Be Found</div>
+          <div class="fitems">SEO<br>Google<br>LinkedIn<br>Ads</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-node">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div>
+          <div class="flabel">Be Understood</div>
+          <div class="fitems">Positioning<br>Messaging<br>Website</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-node">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div class="flabel">Build Trust</div>
+          <div class="fitems">Content<br>Videos<br>Case Studies</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-node">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></div>
+          <div class="flabel">Get Enquiries</div>
+          <div class="fitems">Landing Pages<br>Campaigns<br>Lead Gen</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-final">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24" style="stroke:var(--orange)"><path d="M4 18l5-6 4 4 7-9"/><path d="M15 7h5v5"/></svg></div>
+          <div class="flabel">Win More Business</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE DO ================= -->
+  <section id="what-we-do">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What We Do</span>
+        <h2>We build your digital marketing engine.</h2>
+      </div>
+
+      <div class="services-grid reveal">
+        <div class="service-item">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></div>
+          <span class="svc-num">01</span>
+          <h3>Positioning</h3>
+          <p>"Why should I choose you over the competitor down the road?" That's the question positioning answers.</p>
+        </div>
+        <div class="service-item">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <span class="svc-num">02</span>
+          <h3>Website</h3>
+          <p>Your best salesperson — built to help buyers understand and trust you, fast.</p>
+          <a href="#contact" class="btn-link">Build My Website <span class="btn-arrow">→</span></a>
+        </div>
+        <div class="service-item">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="M20 20l-5.5-5.5"/></svg></div>
+          <span class="svc-num">03</span>
+          <h3>SEO</h3>
+          <p>Be found when buyers are already searching — in India or overseas.</p>
+        </div>
+        <div class="service-item">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+          <span class="svc-num">04</span>
+          <h3>LinkedIn</h3>
+          <p>Stay visible to the people who influence buying decisions.</p>
+        </div>
+        <div class="service-item">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l6 3-6 3z"/></svg></div>
+          <span class="svc-num">05</span>
+          <h3>Video</h3>
+          <p>Complex products, made easy to understand — by showing them.</p>
+        </div>
+        <div class="service-item">
+          <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 18l5-6 4 4 7-9"/><path d="M15 7h5v5"/></svg></div>
+          <span class="svc-num">06</span>
+          <h3>Performance Marketing</h3>
+          <p>Reach buyers beyond your network, including overseas. Enquiries, not just traffic.</p>
+        </div>
+      </div>
+
+      <div class="method-strip reveal">
+        <span class="method-label">Our method — the Story Marketing System™:</span>
+        <span class="method-chain">Story Research → Positioning → Copy → Design &amp; Video → Website → Distribution → Metrics &amp; Learning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ================= -->
+  <section class="problem" id="about">
+    <div class="wrap why-grid">
+      <div class="reveal">
+        <span class="eyebrow">Why Story Marketing</span>
+        <h2 class="section-head">We understand the manufacturing marketing problem.</h2>
+        <div class="why-text" style="margin-top:20px;">
+          <p>Selling an industrial pump isn't like selling a T-shirt — manufacturing buyers ask different questions.</p>
+          <p class="bigline">That's why we specialise in marketing for manufacturers.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p style="font-size:13px; color:var(--gray); margin-bottom:14px; font-weight:600; text-transform:uppercase; letter-spacing:.06em;">Buyers care about:</p>
+        <div class="chip-wrap">
+          <span class="chip">Specifications</span>
+          <span class="chip">Applications</span>
+          <span class="chip">Quality</span>
+          <span class="chip">Reliability</span>
+          <span class="chip">Certifications</span>
+          <span class="chip">Service</span>
+          <span class="chip">Delivery</span>
+          <span class="chip">Technical Capability</span>
+          <span class="chip">Track Record</span>
+          <span class="chip">Export Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SHIFT + RELATIONSHIPS ================= -->
+  <section class="problem">
+    <div class="wrap shift-rel-grid">
+      <div class="reveal">
+        <span class="eyebrow">The Shift</span>
+        <h2 class="section-head" style="margin-bottom:18px;">You get your time back, and the enquiries keep coming anyway.</h2>
+        <p class="shift-text">Right now, growth runs through you — you follow up, explain, and chase every enquiry. Once the system is running, your website, content and campaigns do that work instead. You stay involved only where you want to be.</p>
+      </div>
+
+      <div class="rel-text reveal">
+        <span class="eyebrow">We Don't Replace Relationships</span>
+        <h2 class="section-head" style="margin-bottom:16px;">We help you create more of them.</h2>
+        <p>Relationships will always matter. But your founder shouldn't have to create every opportunity alone — we build visibility, trust and conversations that turn into enquiries on their own.</p>
+        <p class="rel-closer">Your relationships become an advantage — not the only way you grow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHO WE WORK WITH + SUCCESS ================= -->
+  <section id="who" class="problem">
+    <div class="wrap who-success-grid">
+      <div class="reveal">
+        <span class="eyebrow">Who We Work With</span>
+        <h2 class="section-head">Built for manufacturing &amp; industrial businesses.</h2>
+        <div class="industry-wrap">
+          <span class="industry-pill">Industrial Equipment</span>
+          <span class="industry-pill">Machinery</span>
+          <span class="industry-pill">Engineering Companies</span>
+          <span class="industry-pill">OEMs</span>
+          <span class="industry-pill">Components &amp; Spare Parts</span>
+          <span class="industry-pill">Automation</span>
+          <span class="industry-pill">Fabrication</span>
+          <span class="industry-pill">Electrical &amp; Electronics</span>
+          <span class="industry-pill">Industrial Services</span>
+          <span class="industry-pill export">Exporters</span>
+          <span class="industry-pill export">International Buyers</span>
+        </div>
+        <p class="who-closer">If buyers need to <b>understand what you make before they buy it</b> — nearby or overseas — this is built for you.</p>
+        <div class="export-note">
+          <span class="en-tag">Exporting? We build for that too.</span>
+          <p>English-first content, global directory listings, and LinkedIn outreach to international buyers.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <span class="eyebrow">Six Months From Now</span>
+        <h2 class="section-head">What success looks like.</h2>
+        <div class="success-list">
+          <div class="success-item"><div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg></div><p>Your website clearly explains what you do.</p></div>
+          <div class="success-item"><div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg></div><p>Your products appear in search.</p></div>
+          <div class="success-item"><div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg></div><p>LinkedIn consistently shows your expertise.</p></div>
+          <div class="success-item"><div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg></div><p>Buyers understand you before the first meeting.</p></div>
+          <div class="success-item"><div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg></div><p>Enquiries stop depending on the founder alone.</p></div>
+        </div>
+        <p class="success-closer">That's the system we're here to build.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THE PLAN ================= -->
+  <section class="plan" id="how-it-works">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin:0 auto 44px; text-align:center;">
+        <span class="eyebrow" style="justify-content:center;">How It Works</span>
+        <h2>Three steps. One system.</h2>
+      </div>
+      <div class="plan-grid reveal">
+        <div class="plan-step">
+          <span class="plan-num">1</span>
+          <h3>Book a Discovery Call</h3>
+          <p>A free 30-minute conversation about your products, your buyers, and where they currently find you — no pitch, no obligation.</p>
+        </div>
+        <div class="plan-step">
+          <span class="plan-num">2</span>
+          <h3>We Build Your System</h3>
+          <p>Positioning, website, SEO and content built specifically around how your buyers search and decide.</p>
+        </div>
+        <div class="plan-step">
+          <span class="plan-num">3</span>
+          <h3>You Win More Business</h3>
+          <p>Enquiries start arriving that didn't depend on a referral, a trade show, or the founder's personal network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="cta" id="contact">
+    <div class="cta-art">
+      <svg viewBox="0 0 300 500" preserveAspectRatio="xMidYMid slice">
+        <rect width="300" height="500" fill="#141414"/>
+        <g stroke="#3a3a36" stroke-width="1.5" fill="none" opacity="0.8">
+          <path d="M0 120 L300 120"/>
+          <path d="M40 500 L40 200 L260 200 L260 500"/>
+          <path d="M100 500 L100 240"/>
+          <path d="M180 500 L180 240"/>
+        </g>
+        <circle cx="150" cy="120" r="4" fill="#e8590c"/>
+      </svg>
+    </div>
+    <div class="wrap cta-inner">
+      <div>
+        <h2>Your next customer may already be looking for what you make. <span class="accent">Make sure they find you.</span></h2>
+        <p>No generic pitch — just a conversation about where Story Marketing can help you win more business.</p>
+      </div>
+      <div class="cta-ctas">
+        <a href="mailto:hello@storymarketing.in?subject=Discovery%20Call%20Request&body=Hi%20Story%20Marketing%2C%0A%0AI%27d%20like%20to%20book%20a%20discovery%20call.%0A%0ACompany%3A%20%0AWebsite%3A%20%0ABest%20time%20to%20call%3A%20" class="btn btn-primary">Book a Discovery Call <span class="btn-arrow">→</span></a>
+        <div class="cta-email">
+          <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px;"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          hello@storymarketing.in
+        </div>
+        <span class="cta-note">Response within 1 business day</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="logo">Story <span>Marketing</span></div>
+          <p>Marketing that helps manufacturing companies win more business.</p>
+          <span class="tag">Built for Manufacturers &amp; Exporters.</span>
+        </div>
+        <div class="foot-col">
+          <h5>Services</h5>
+          <a href="#what-we-do">Positioning</a>
+          <a href="#what-we-do">Website</a>
+          <a href="#what-we-do">SEO</a>
+          <a href="#what-we-do">LinkedIn</a>
+          <a href="#what-we-do">Video</a>
+          <a href="#what-we-do">Performance Marketing</a>
+        </div>
+        <div class="foot-col">
+          <h5>How It Works</h5>
+          <a href="#how-it-works">Book a Call</a>
+          <a href="#how-it-works">We Build Your System</a>
+          <a href="#how-it-works">Win More Business</a>
+        </div>
+        <div class="foot-col">
+          <h5>Who We Help</h5>
+          <a href="#who">Manufacturers</a>
+          <a href="#who">Industrial Companies</a>
+          <a href="#who">Engineering Businesses</a>
+          <a href="#who">OEMs &amp; Suppliers</a>
+          <a href="#who">Exporters</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Story Marketing — a part of Arkmedis. Hyderabad, India.</span>
+        <div class="foot-social">
+          <svg class="icon" viewBox="0 0 24 24" style="width:15px;height:15px;"><rect x="4" y="9" width="4" height="11"/><circle cx="6" cy="5" r="1.6"/><path d="M12 9v11M12 13c0-2.5 2-4 4-4s4 1.5 4 4v7"/></svg>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold:0.1 });
+    revealEls.forEach(el=>io.observe(el));
+  </script>
+
+</body>
+</html>
+
